@@ -1,0 +1,70 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.ProductViewModel
+<div class="container">
+    <table id="product-table" class="table">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>CategoryId</th>
+                <th>Category</th>
+                <th>ManufacturerId</th>
+                <th>ManufacturerName</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Model</th>
+                <th>Released Date</th>
+                <th>Released Year</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.ManufacturerId</td>
+                    <td>@item.ManufacturerName</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Model</td>
+                    <td>@item.ReleasedDate</td>
+                    <td>@item.ReleasedYear</td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("EditProduct", "Product",new { area = "Area" , id = item.Id })" data-target="#AddProductModal" class="btn-edit btn btn-info btn-default">Edit</button></td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("DeleteProduct", "Product",new { area = "Area" , id = item.Id })" data-target="#DeleteProductModal" class="btn-delete btn btn-info btn-default">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    var dataTable
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+
+      dataTable = $('#product-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] },
+           { className: "hide_column", "targets": [1]},
+           { className: "hide_column", "targets": [3]}]
+
+      });
+
+      $('#product-table tbody').on('click', 'tr', function () {
+          dataTable.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      });
+
+    });
+
+</script>
+<!-- #end script -->

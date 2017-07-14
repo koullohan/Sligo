@@ -1,0 +1,86 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.ManufacturerViewModel
+@{
+    ViewBag.Title = "Manufacturer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-unobstrusive-ajax")
+
+
+<body>
+    <div id="manufacturerList">@Html.Partial("~/Areas/Area/Views/Manufacturer/Manufacturers.cshtml")</div>
+    <!--#begin manufacturermodal-->
+    <div id="AddManufacturerModal" class="modal fade" role="dialog"></div>
+    <!--#end manufacturermodal-->
+    <!--#begin categorymodal-->
+    <div id="DeleteManufacturerModal" class="modal fade" role="dialog"></div>
+    <!--#end manufacturermodal-->
+    <!-- #begin manufacturermodalbutton-->
+    <button type="button" data-toggle="modal" href="@Url.Action("AddManufacturer", "Manufacturer")" data-target="#AddManufacturerModal" class="btn-add btn btn-info btn-default">Add</button>
+    <!--#end manufacturermodalbutton -->
+</body>
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+        restartModal();
+    });
+
+    var dataTable;
+    function createTable() {
+        dataTable = $('#manufacturer-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] },]
+        });
+
+        $('#manufacturer-table tbody').on('click', 'tr', function () {
+            dataTable.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    }
+
+    function updateManufacturerTable(e) {                                                    //  called function on ajax.beginform success
+        if (e.success && e.IsEdit == false) {
+            clearInputs();
+            hideModal();
+            reloadTable();
+            restartModal();
+        }
+        else if (e.success && e.IsEdit == true) {
+                clearInputs();
+                hideModal();
+                dataTable.destroy();
+                createTable();
+                restartModal();
+
+                var url = "@Html.Raw(@Url.Action("EditManufacturer", "Manufacturer", new { area = "Area" ,id = "manufacturer" }))";
+            url = url.replace('manufacturer', e.data.ManufacturerId);
+            new_record = [e.data.ManufacturerId, e.data.ManufacturerName, e.data.ManufacturerLocation, e.data.ManufacturerEmail, e.data.ManufacturerMobile, e.data.ManufacturerTelephone, e.data.ManufacturerFax, e.data.ManufacturerManager, '<button type="button" data-toggle="modal" href=' + url + ' data-target="#AddManufacturerModal" class="btn-edit btn btn-info btn-default">Edit</button>', '<button type="button" class="btn-delete btn btn-info btn-default">Delete</button>'];
+            dataTable.row('.selected').data(new_record).draw(false);
+        }
+    }
+
+    function restartModal() {
+        $("#AddManufacturerModal").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+    }
+
+    function reloadTable() {
+        $("#manufacturerList").load("Manufacturer/LoadManufacturers");
+    }
+
+    function hideModal() {
+        $('#AddManufacturerModal').modal('hide');                                            //  called function hide modal.
+    }
+
+    function clearInputs() {                                                            //  called function clear inputs , set productId to zero and categoryid to Select Category.
+        $('.modal-body').find('input').val('');
+        $('#manufacturerId').val('0');
+    }
+
+</script>
+<!-- #end script -->

@@ -1,0 +1,91 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.ProductViewModel
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-unobstrusive-ajax")
+
+
+<body>
+<div id="productList">@Html.Partial("~/Areas/Area/Views/Product/Products.cshtml")</div>
+<!--#begin productmodal-->
+<div id="AddProductModal" class="modal fade" role="dialog"></div>
+<!--#end productmodal-->
+<!--#begin productmodal-->
+<div id="DeleteProductModal" class="modal fade" role="dialog"></div>
+<!--#end productmodal-->
+<!-- #begin productmodalbutton-->
+<button type="button" data-toggle="modal" href="@Url.Action("AddProduct", "Product")" data-target="#AddProductModal" class="btn-add btn btn-info btn-default">Add</button>
+<!--#end productmodalbutton -->
+</body>
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+        restartModal();
+    });
+
+    var dataTable;
+    function createTable() {
+        dataTable = $('#product-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] },
+           { className: "hide_column", "targets": [1] },
+           { className: "hide_column", "targets": [3] }]
+        });
+
+        $('#product-table tbody').on('click', 'tr', function () {
+            dataTable.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    }
+
+    function updateProductTable(e) {                                                    //  called function on ajax.beginform success
+        if (e.success && e.IsEdit == false) {
+            clearInputs();
+            hideModal();
+            reloadTable();                    
+            restartModal();
+        }
+        else if (e.success && e.IsEdit == true) {             
+                clearInputs();
+                hideModal();
+                dataTable.destroy();
+                createTable();
+                restartModal();
+
+                arr = $.map(e.data, function (value, index) { return [value]; });
+                var url = "@Html.Raw(@Url.Action("EditProduct", "Product", new { area = "Area" ,id = "product" }))";
+            url = url.replace('product', arr[0]);
+            new_record = [arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], '<button type="button" data-toggle="modal" href=' + url + ' data-target="#AddProductModal" class="btn-edit btn btn-info btn-default">Edit</button>', '<button type="button" class="btn-delete btn btn-info btn-default">Delete</button>'];
+            dataTable.row('.selected').data(new_record).draw(false);                                                      
+        }
+    }
+
+    function restartModal() {
+        $("#AddProductModal").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+    }
+
+    function reloadTable() {
+        $("#productList").load("Product/LoadProducts");       
+    }
+
+    function hideModal() {
+        $('#AddProductModal').modal('hide');                                            //  called function hide modal.
+    }
+
+    function clearInputs() {                                                            //  called function clear inputs , set productId to zero and categoryid to Select Category.
+        $('.modal-body').find('input').val('');
+        $('#productId').val('0');
+        $('select#categoryId option:eq(0)').prop('selected', 'selected');
+        $('select#manufacturerId option:eq(0)').prop('selected', 'selected');
+    }
+
+</script>
+<!-- #end script -->

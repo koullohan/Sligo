@@ -1,0 +1,90 @@
+	2. Administration > Organizations > Click Add
+	3. Administration > Organizations > Add an Existing Code (Validation)
+	6. Administration > Modify Organizations > Add an Existing Code (Validation)
+	11. Administration > VAT Reg No > Add an Existing VAT Reg No (Validation)
+	13. Administration > Organization Management > VAT Reg No(Viewset)
+	21. Administration > Organization Management > Create Multi PO ASN (Viewset)
+	22. Administration > Create Multi PO ASN
+	23. Administration > Create Multi PO ASN > Click Add More PO
+	24. Administration > Create Multi PO ASN > Click Show
+	25. Administration > Create Multi PO ASN > Click Add To Multi PO ASN
+	34. Administration > Archive History > Click Go (Validation)
+	35. Administration > Application Membership > Click Add > Click Save
+	46. Communication > Protocol > Click Add
+	48. Communication > Protocol > Protocol Attribute > Click Add
+	50. Reports > Organization Volume Summary > Dropdown
+	52. Reports > Document Type Summary > Dropdown
+	57. Reports > Custom Reports > ETPA Summary (Viewset)
+	59. Reports > Shipment Status > Page
+	62. SDI > Transaction Set > Click Add
+	64. SDI > Inbound Translation > Click Add
+	65. SDI > Inbound Translation > Click Interchange Validation
+	66. SDI > Inbound Translation > Click Interchange Validation > Add
+	67. SDI > Inbound Translation > Click Group Validation
+	68. SDI > Inbound Translation > Click Group Validation > Click Save
+	69. SDI > Inbound Translation > Click Group Validation > Click Add
+	70. SDI > Inbound Translation > Click Group Validation > Click Add (Save and Cancel Button)
+	73. SDI > Business Rule > Click Add
+	75. SDI > Outbound Translation > Select Community > Select Document Type > Click Search > Select a Record
+	77. SDI > Outbound Translation > Select Community > Select Document Type > Click Search > Select a Duplicate Record to Copy > Select Destination Community > Select Destination DocumentType > Select Destination Organization > Click Copy 
+	79. SDI > Custom Field Setting > Click Add
+	80. SDI > Inbound EDD Exceptions > Select a Transaction Set > Click Search < Click Add
+	82. SDI > Inbound EDD ISA Config Details > Select a Transaction Set > Click Search < Click Add
+	83. SDI > Inbound EDD ISA Config Details > Select a Transaction Set > Click Search < Enter and Invalid Sender Code "test" > Click Save
+	84. SDI > Outbound Schedule Exceptions > Select Community > Select Organization > Click Search > Click Add
+	85. SDI > Outbound Schedule Exceptions > Select Community > Select Organization > Click Search > Click Add > Validations
+	91. SDI > Directory Maintenance > SDI Directory > Click Add
+	93. SDI > Directory Maintenance > SDI Community Directory > Table
+	94. SDI > Directory Maintenance > SDI Community Directory > Click Add
+	100. SDI > Archive Type > Click Add
+	105. SDI > Communication Protocol > Click Add
+	107. SDI > Compliance Type > Click Add
+	109. SDI > Directory Sort > Click Add
+	111. SDI > Document Location > Click Add
+	113. SDI > Document Start Tag Position > Click Add
+	115. SDI > Document Status > Click Add
+	117. SDI > Reference > Viewset
+	118. SDI > EDI Error Code > Click Add
+	120. SDI > EDI Status Code > Click Add
+	122. SDI > EDIFACT Separator > Page
+	123. SDI > EDIFACT Separator > Click Add
+	125. SDI > Envelope Type > Click Add
+	127. SDI > Field Type > Click Add
+	129. SDI > File Archive Type > Click Add
+	131. SDI > File Part Name > Click Add
+	133. SDI > File Type > Click Add
+	134. SDI > Transaction Set File Type > Click Add
+	136. System > Communities > Page
+	137. System > Communities > Click Document Type > Page
+	139. System > Communities > Click Community Regions > Page
+	140. System > Communities > Click Organization Types > Click Functions Page 
+	142. System > Organizations > Page
+	143. System > Organizations > Click Users
+	144. System > Organizations > Click Users > Click Edit
+	147. System > Community Components > Steps
+	162. System > BRE Exception List > Click Add > (Leave the field empty) > Click Save (Validation)
+	163. System > Reference > BRE Exception List (Viewset)
+	164. System > BRE Exception List > Page
+	165. System > BRE Exception List > Click Add without Selecting Community (Validation)
+	167. System > BRE Exception List > Select a Community > Click Add > Add a Duplicate Record > Click Save (Validation)
+	170. System > Email Log > Page
+	171. System > System Error > Page
+	172. System > Error > Viewset
+	173. System > SDI Error > Page
+	174. System > BRE Error > Click View
+Communication > Protocol Type > Add (Validation)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

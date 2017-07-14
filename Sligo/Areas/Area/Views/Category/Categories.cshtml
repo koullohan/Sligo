@@ -1,0 +1,51 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.CategoryViewModel
+<div class="container">
+    <table id="category-table" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CategoryList)
+            {
+                <tr>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryName</td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("EditCategory", "Category",new { area = "Area" , id = item.CategoryId })" data-target="#AddCategoryModal" class="btn-edit btn btn-info btn-default">Edit</button></td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("DeleteCategory", "Category",new { area = "Area" , id = item.CategoryId })" data-target="#DeleteCategoryModal" class="btn-delete btn btn-info btn-default">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    var dataTable
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+
+      dataTable = $('#category-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] }]
+      });
+
+      $('#category-table tbody').on('click', 'tr', function () {
+          dataTable.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      });
+
+    });
+
+</script>
+<!-- #end script -->

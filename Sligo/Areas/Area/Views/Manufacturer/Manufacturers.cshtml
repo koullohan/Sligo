@@ -1,0 +1,64 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.ManufacturerViewModel
+<div class="container">
+    <table id="manufacturer-table" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Telephone</th>
+                <th>Fax</th>
+                <th>Manager</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ManufacturerList)
+            {
+                <tr>
+                    <td>@item.ManufacturerId</td>
+                    <td>@item.ManufacturerName</td>
+                    <td>@item.ManufacturerLocation</td>
+                    <td>@item.ManufacturerEmail</td>
+                    <td>@item.ManufacturerMobile</td>
+                    <td>@item.ManufacturerTelephone</td>
+                    <td>@item.ManufacturerFax</td>
+                    <td>@item.ManufacturerManager</td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("EditManufacturer", "Manufacturer",new { area = "Area" , id = item.ManufacturerId })" data-target="#AddManufacturerModal" class="btn-edit btn btn-info btn-default">Edit</button></td>
+                    <td><button type="button" data-toggle="modal" href="@Url.Action("DeleteManufacturer", "Manufacturer",new { area = "Area" , id = item.ManufacturerId })" data-target="#DeleteManufacturerModal" class="btn-delete btn btn-info btn-default">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    var dataTable
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+
+        dataTable = $('#manufacturer-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] }]
+      });
+
+        $('#manufacturer-table tbody').on('click', 'tr', function () {
+          dataTable.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      });
+
+    });
+
+</script>
+<!-- #end script -->
+

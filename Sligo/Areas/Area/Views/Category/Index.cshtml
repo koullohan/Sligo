@@ -1,0 +1,87 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.CategoryViewModel
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-unobstrusive-ajax")
+
+
+<body>
+    <div id="categoryList">@Html.Partial("~/Areas/Area/Views/Category/Categories.cshtml")</div>
+    <!--#begin categorymodal-->
+    <div id="AddCategoryModal" class="modal fade" role="dialog"></div>
+    <!--#end categorymodal-->
+    <!--#begin categorymodal-->
+    <div id="DeleteCategoryModal" class="modal fade" role="dialog"></div>
+    <!--#end productmodal-->
+    <!-- #begin categorymodalbutton-->
+    <button type="button" data-toggle="modal" href="@Url.Action("AddCategory", "Category")" data-target="#AddCategoryModal" class="btn-add btn btn-info btn-default">Add</button>
+    <!--#end categorymodalbutton -->
+</body>
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+        restartModal();
+    });
+
+    var dataTable;
+    function createTable() {
+        dataTable = $('#category-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+            "columnDefs": [
+           { className: "hide_column", "targets": [0] },]
+        });
+
+        $('#category-table tbody').on('click', 'tr', function () {
+            dataTable.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    }
+
+    function updateCategoryTable(e) {                                                    //  called function on ajax.beginform success
+        if (e.success && e.IsEdit == false) {
+            clearInputs();
+            hideModal();
+            reloadTable();
+            restartModal();
+        }
+        else if (e.success && e.IsEdit == true) {
+                clearInputs();
+                hideModal();
+                dataTable.destroy();
+                createTable();
+                restartModal();
+
+                arr = $.map(e.data, function (value, index) { return [value]; });
+                var url = "@Html.Raw(@Url.Action("EditCategory", "Category", new { area = "Area" ,id = "category" }))";
+            url = url.replace('category', arr[0]);
+            new_record = [arr[0], arr[1], '<button type="button" data-toggle="modal" href=' + url + ' data-target="#AddCategoryModal" class="btn-edit btn btn-info btn-default">Edit</button>', '<button type="button" class="btn-delete btn btn-info btn-default">Delete</button>'];
+            dataTable.row('.selected').data(new_record).draw(false);
+        }
+    }
+
+    function restartModal() {
+        $("#AddCategoryModal").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+    }
+
+    function reloadTable() {
+        $("#categoryList").load("Category/LoadCategories");
+    }
+
+    function hideModal() {
+        $('#AddCategoryModal').modal('hide');                                            //  called function hide modal.
+    }
+
+    function clearInputs() {                                                            //  called function clear inputs , set productId to zero and categoryid to Select Category.
+        $('.modal-body').find('input').val('');
+        $('#categoryId').val('0');
+    }
+
+</script>
+<!-- #end script -->

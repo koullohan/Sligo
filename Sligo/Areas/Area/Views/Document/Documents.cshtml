@@ -1,0 +1,45 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.DocumentViewModel
+<!--#begin product table-->
+<div class="container">
+    <table id="document-table" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DocumentList)
+            {
+                <tr>
+                    <td>@item.DocumentName</td>
+                    <td>@Html.ActionLink("Download", "DownloadDocument", "Document", new { area = "Area" , documentName = @item.DocumentName }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!--#end delivery table-->
+
+<!-- #begin script -->
+<script type="text/javascript">
+
+    var dataTable
+
+    $(document).ready(function () {                                                     //  prepares datatable, highlight row selection , modal clear inputs on close.
+
+        dataTable = $('#document-table').DataTable({
+            stateSave: true,
+            "ordering": false,
+
+      });
+
+        $('#document-table tbody').on('click', 'tr', function () {
+          dataTable.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
+      });
+
+    });
+
+</script>
+<!-- #end script -->

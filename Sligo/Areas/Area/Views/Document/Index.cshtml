@@ -1,0 +1,23 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.DocumentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-unobstrusive-ajax")
+
+<h2>Documents</h2>
+<html>
+<head>
+    <title>Documents</title>
+</head>
+<body>
+    <!--#begin upload form-->
+    <div>@Html.Partial("~/Areas/Area/Views/Document/AddDocument.cshtml")</div>
+    <!--#end upload form-->
+    <!--#begin upload form-->
+    <div id="resultView">@Html.Partial("~/Areas/Area/Views/Document/Documents.cshtml")</div>
+    <!--#end upload form-->
+</body>
+</html>
+
+

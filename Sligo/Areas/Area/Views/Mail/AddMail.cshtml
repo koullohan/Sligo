@@ -1,0 +1,28 @@
+﻿@model Sligo.Areas.Area.Models.ViewModel.MailViewModel
+@using (Ajax.BeginForm("SendMail", "Mail", new { area = "Area" }, new AjaxOptions() { OnSuccess = "showMailSuccessAlert" }))
+{
+    <div class="form-group">
+        <label for="mailFromLabel">Your Name</label>
+        @Html.TextBoxFor(m => m.MailName, new { @class = "form-control input-sm", id = "mailname", name = "mailname", required = "required", autocomplete = "off" })
+    </div>
+
+    <div class="form-group">
+        <label for="mailToLabel">Your Email</label>
+        @Html.TextBoxFor(m => m.MailEmail, new { @class = "form-control input-sm", id = "mailemail", name = "mailemail", required = "required", autocomplete = "off" })
+    </div>
+
+    <div class="form-group">
+        <label for="mailSubjectLabel">Subject</label>
+        @Html.TextBoxFor(m => m.MailSubject, new { @class = "form-control input-sm", id = "mailsubject", name = "mailsubject", autocomplete = "off" })
+    </div>
+
+    <div class="form-group">
+        <label for="mailBodyLabel">Body</label>
+        @Html.TextAreaFor(m => m.MailBody, new { @class = "form-control input-sm", id = "mailbody", name = "mailbody", required = "required", autocomplete = "off" })
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn-save btn btn-default" value="Save">Send</button>
+        <button type="button" class="btn-cancel btn btn-default" data-dismiss="modal">Cancel</button>
+    </div>
+}
